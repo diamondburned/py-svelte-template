@@ -3,6 +3,7 @@
 from contextlib import asynccontextmanager
 from os import path
 from fastapi import FastAPI
+from fastapi.routing import APIRoute
 import db
 import api
 import sys
@@ -18,6 +19,11 @@ async def with_init_db(_: FastAPI):
 
 app = FastAPI(lifespan=with_init_db)
 app.include_router(api.root)
+
+# Set proper operationId.
+for route in app.routes:
+    if isinstance(route, APIRoute):
+        route.operation_id = route.name
 
 if __name__ == "__main__":
     prog = sys.argv[0]
@@ -38,4 +44,9 @@ if __name__ == "__main__":
     db.set_sqlite_path(args.database)
     db.set_echo(args.echo_sql)
 
-    uvicorn.run("backend:app", host=args.host, port=args.port, reload=args.reload)
+    uvicorn.run(
+        "backend:app",
+        host=args.host,
+        port=args.port,
+        reload=args.reload,
+    )
