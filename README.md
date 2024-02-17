@@ -1,9 +1,11 @@
-# py-rest-template
+# py-svelte-template
 
-A Python RESTful FastAPI template with SQLite database and session handling.
+A full-stack web application template with Python FastAPI, Svelte, SQLite
+database, session handling and integration testing.
 
 ## Features
 
+- Uses [SvelteKit](https://kit.svelte.dev/) for the frontend
 - Uses [FastAPI](https://fastapi.tiangolo.com/) for the API
 - Uses [Pydantic](https://pydantic-docs.helpmanual.io/) for data validation
 - Uses [SQLModel](https://sqlmodel.tiangolo.com/) for database models and
@@ -11,7 +13,7 @@ A Python RESTful FastAPI template with SQLite database and session handling.
 - Uses [SQLite](https://www.sqlite.org/index.html) for the database
 - Prioritizes asynchronous code for better performance (with `aiosqlite`)
 - Contains a basic user authentication system with login and registration
-    - Includes password hashing with PBKDF2 using `hashlib`
+  - Includes password hashing with PBKDF2 using `hashlib`
 - Contains [hurl](https://hurl.dev) tests for the API (in `tests/`)
 
 ## Usage
@@ -24,17 +26,7 @@ Once you have the development environment set up, you can run the following
 commands:
 
 ```sh
-# Install the project dependencies
-pip install -r requirements.txt
-
-# Run the server
-./main.py
-```
-
-You may also choose to run the server with `uvicorn` for hot-reloading:
-
-```sh
-uvicorn main:app --reload
+foreman start
 ```
 
 ## License

@@ -53,9 +53,15 @@
 					inputsFrom = [ self.packages.${system}.default ];
 
 					packages = with pkgs; [
+						nodejs
 						poetry
 						hurl
+						foreman
 					];
+
+					shellHook = ''
+						export PATH="$PATH:$(git rev-parse --show-toplevel)/node_modules/.bin"
+					'';
 				};
 			}
 		);

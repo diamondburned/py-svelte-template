@@ -19,7 +19,6 @@ async def with_init_db(_: FastAPI):
 app = FastAPI(lifespan=with_init_db)
 app.include_router(api.root)
 
-
 if __name__ == "__main__":
     prog = sys.argv[0]
     prog = path.basename(prog)
@@ -28,6 +27,7 @@ if __name__ == "__main__":
     parser.add_argument("-H", "--host", default="127.0.0.1", help="The host to bind to")
     parser.add_argument("-p", "--port", default=5765, help="Port to bind to", type=int)
     parser.add_argument("--database", default="database.db", help="Path to database")
+    parser.add_argument("--reload", action="store_true", help="Enable auto-reload")
     parser.add_argument(
         "--echo-sql",
         action="store_true",
@@ -38,4 +38,4 @@ if __name__ == "__main__":
     db.set_sqlite_path(args.database)
     db.set_echo(args.echo_sql)
 
-    uvicorn.run(app, host=args.host, port=args.port)
+    uvicorn.run("backend:app", host=args.host, port=args.port, reload=args.reload)
