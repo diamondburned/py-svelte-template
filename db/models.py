@@ -23,7 +23,7 @@ class Asset(SQLModel, table=True):
     """
     An asset is any arbitrary binary data that can be stored in the database.
     It is identified by the base64-encoded SHA-256 hash of the data.
-    Content types are supplied by the server.
+    Content types are supplied by the client.
     """
 
     hash: str = Field(primary_key=True)
